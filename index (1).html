@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>دردشة بسيطة</title>
+  <style>
+    #chatPage { display:none; }
+    #messages { height:300px; overflow:auto; border:1px solid black; padding:5px; }
+  </style>
+</head>
+<body>
+
+<div id="passwordPage">
+  <h2>ادخل كلمة السر</h2>
+  <input type="password" id="sitePassword" placeholder="كلمة السر">
+  <button onclick="checkPassword()">دخول</button>
+</div>
+
+<div id="chatPage">
+  <h2>الدردشة</h2>
+  <div id="messages"></div>
+  <input type="text" id="messageInput" placeholder="اكتب رسالتك">
+  <button onclick="sendMessage()">إرسال</button>
+</div>
+
+<script>
+const SECRET_PASSWORD = "Ahmed2026"; // غيرها لكلمة سر انت عايزها
+let messages = [];
+
+function checkPassword() {
+  const input = document.getElementById("sitePassword").value;
+  if (input === SECRET_PASSWORD) {
+    document.getElementById("passwordPage").style.display = "none";
+    document.getElementById("chatPage").style.display = "block";
+    showMessages();
+  } else {
+    alert("كلمة السر غلط");
+  }
+}
+
+function sendMessage() {
+  const input = document.getElementById("messageInput");
+  if(input.value.trim() !== "") {
+    messages.push(input.value);
+    input.value = "";
+    showMessages();
+  }
+}
+
+function showMessages() {
+  const messagesDiv = document.getElementById("messages");
+  messagesDiv.innerHTML = "";
+  messages.forEach(msg => {
+    const p = document.createElement("p");
+    p.textContent = msg;
+    messagesDiv.appendChild(p);
+  });
+}
+</script>
+
+</body>
+</html>
